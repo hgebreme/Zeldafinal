@@ -78,14 +78,14 @@ SDL_Rect fullScreen = {0, SCREEN_HEIGHT / 4, SCREEN_WIDTH, 3 * SCREEN_HEIGHT / 4
 SDL_Rect blackRect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT / 4}; // black rectange that HUD is displayed on
 SDL_Rect greyRect = {SCREEN_WIDTH / 16, SCREEN_HEIGHT / 32, SCREEN_WIDTH / 4, 3* SCREEN_HEIGHT / 16}; // grey rectangle representing entire map
 SDL_Rect greenLocation = {SCREEN_WIDTH / 8, 5 * SCREEN_HEIGHT / 64, SCREEN_WIDTH / 128, SCREEN_HEIGHT / 128}; // green rectangle showing location on map
-SDL_Rect inventory = {256 / 3, 10, 256 / 3, 224 / 4 - 10};
+SDL_Rect inventory = {256 / 3, 10, 256 / 3, 224 / 4 - 10}; // shows number of rupees, etc.
 LTexture gInvText;
-SDL_Rect invStretch = {SCREEN_WIDTH/3, 0, SCREEN_WIDTH / 3, SCREEN_HEIGHT / 4};
-SDL_Rect heart1 = {3*SCREEN_WIDTH / 4, SCREEN_HEIGHT / 8, 30, 30};
-SDL_Rect heart2 = {3*SCREEN_WIDTH / 4 + 45, SCREEN_HEIGHT / 8, 30, 30};
-SDL_Rect heart3 = {3*SCREEN_WIDTH / 4 + 90, SCREEN_HEIGHT / 8, 30, 30};
-SDL_Rect lifeFont = {2*256/3, 10, 256/3, 224 / 8 - 10};
-SDL_Rect lifeStretch = {2*SCREEN_WIDTH / 3 + 20, 0, SCREEN_WIDTH / 3, SCREEN_HEIGHT / 8};
+SDL_Rect invStretch = {SCREEN_WIDTH/3, 0, SCREEN_WIDTH / 3, SCREEN_HEIGHT / 4}; // stretches inventory to correct size
+SDL_Rect heart1 = {3*SCREEN_WIDTH / 4, SCREEN_HEIGHT / 8, 30, 30}; // first heart in life meter
+SDL_Rect heart2 = {3*SCREEN_WIDTH / 4 + 45, SCREEN_HEIGHT / 8, 30, 30}; // second heart in life meter
+SDL_Rect heart3 = {3*SCREEN_WIDTH / 4 + 90, SCREEN_HEIGHT / 8, 30, 30}; // third heart in life meter
+SDL_Rect lifeFont = {2*256/3, 10, 256/3, 224 / 8 - 10}; // "-LIFE-"
+SDL_Rect lifeStretch = {2*SCREEN_WIDTH / 3 + 20, 0, SCREEN_WIDTH / 3, SCREEN_HEIGHT / 8}; // stretches "-LIFE-" to correct size
 
 
 LTexture::LTexture(){
@@ -431,7 +431,7 @@ int main( int argc, char* args[] ){
                     }
                 }
 
-                // Set texture besed on current keystate
+                // Set walking sprite besed on current keystate
                 const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
                 if(currentKeyStates[SDL_SCANCODE_UP]){
                     ypos--; // move up
@@ -464,49 +464,49 @@ int main( int argc, char* args[] ){
                 }
 
                 // Determine which square character is in
-                if(xpos >= SCREEN_WIDTH - link[frame].w){
+                if(xpos >= SCREEN_WIDTH - stretch.w){
                     switch(num){
                         case 0:
                             num = 1;
-                            xpos = link[frame].w; // move back to left side, might need to be set to 0
+                            xpos = 0; // move back to left side
                             break;
                         case 1:
                             xpos--; // if in quadrant 1, it cannot move to the right so move back so it is still on the screen
                             break;
                         case 2:
                             num = 3;
-                            xpos = link[frame].w;
+                            xpos = 0;
                             break;
                         case 3:
                             xpos--; // cannot move to the right anymore
                             break;
                     }
-                }else if(xpos < link[frame].w){ // might need to be 0
+                }else if(xpos < 0){
                     switch(num){
                         case 0:
                             xpos++; // move link back into range
                             break;
                         case 1:
                             num = 0; // move into quadrant 0
-                            xpos = SCREEN_WIDTH - link[frame].w; // move to right side of the screen
+                            xpos = SCREEN_WIDTH - stretch.w; // move to right side of the screen
                             break;
                         case 2:
                             xpos++; // move link back into screen
                             break;
                         case 3:
                             num = 2; // move to quadrant 2
-                            xpos = SCREEN_WIDTH - link[frame].w; // move to right side of screen
+                            xpos = SCREEN_WIDTH - stretch.w; // move to right side of screen
                             break;
                     }
-                }else if(ypos >= SCREEN_HEIGHT - link[frame].h){
+                }else if(ypos >= SCREEN_HEIGHT - stretch.h){ // if moves to bottom of screen
                     switch(num){
                         case 0:
                             num = 2; // move to quadrant 2
-                            ypos = link[frame].h; // move back to the top side, might need to be set to 0
+                            ypos = SCREEN_HEIGHT / 4; // move back to the top side
                             break;
                         case 1:
                             num = 3; // move to quadrant 3
-                            ypos = link[frame].h; // move back to the top side of the screen, might need to be set to 0
+                            ypos = SCREEN_HEIGHT / 4; // move back to the top side of the screen
                             break;
                         case 2:
                             ypos--; // move back into screen
@@ -515,7 +515,7 @@ int main( int argc, char* args[] ){
                             ypos--; // move back into screen
                             break;
                     }
-                }else if(ypos < link[frame].h){ // might need to be 0
+                }else if(ypos < SCREEN_HEIGHT / 4){ // if moves up to top of screen
                     switch(num){
                         case 0:
                             ypos++; // move back into screen
@@ -525,11 +525,11 @@ int main( int argc, char* args[] ){
                             break;
                         case 2:
                             num = 0; // move into quadrant 0
-                            ypos = SCREEN_HEIGHT - link[frame].h; // move to the bottom of the screen
+                            ypos = SCREEN_HEIGHT - stretch.h; // move to the bottom of the screen
                             break;
                         case 3:
                             num = 1; // move into quadrant 1
-                            ypos = SCREEN_HEIGHT - link[frame].h; // move to the bottom of the screen
+                            ypos = SCREEN_HEIGHT - stretch.h; // move to the bottom of the screen
                             break;
                     }
                 }
