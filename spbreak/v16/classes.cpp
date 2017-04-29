@@ -5,6 +5,7 @@
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL_mixer.h>
+#include<SDL2/SDL_ttf.h>
 #include<stdio.h>
 #include<string>
 #include<time.h>
@@ -115,7 +116,7 @@ bool init() {
                 }
                 
                 //Initialize SDL_mixer
-                if(Mix_openAudio(44100,MIX_DEFAULT_FORMAT,2,2048)<0){
+                if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,8192)<0){
                     printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
                     success =false;
                 }
@@ -127,9 +128,13 @@ bool init() {
 }        
 
 bool loadMedia() {
+     
     // Loading success flag
     bool success = true;
-
+    if (Mix_VolumeMusic(-1) ==0){
+        printf("error \n");
+        success=false;
+     };
     // Load character texture
     if( !link.setLTexture("zelda-sprites-link.png")){
         printf("Failed to load Link texture image!\n");
@@ -322,7 +327,8 @@ bool loadMedia() {
         b.setSprites(enemies);
     }
     // Load music
-    gMusic= Mi_LoadMUS("Gamesound.wav");
+    Mix_VolumeMusic(MIX_MAX_VOLUME);
+    gMusic= Mix_LoadMUS("Gamesound.wav");
     if (gMusic == NULL){
         printf("Failed to load music! SDL_mixer Error: %s\n", Mix_GetError() );
         success =false;
@@ -565,7 +571,8 @@ int main( int argc, char* args[] ){
 
             // While application is running
             while( !quit ){
-                Mix_PlayMusic(gMusic, -1);
+                // SDL_Delay(100); 
+                 Mix_PlayMusic(gMusic, -1);
                 // Handle events on queue
                 while(SDL_PollEvent( &e ) != 0){
                     // User requests quit
