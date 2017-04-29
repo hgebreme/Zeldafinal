@@ -4,6 +4,7 @@
 
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_image.h>
+#include<SDL2/SDL_mixer.h>
 #include<stdio.h>
 #include<string>
 #include<time.h>
@@ -73,13 +74,16 @@ SDL_Rect heart3 = {3*SCREEN_WIDTH / 4 + 90, SCREEN_HEIGHT / 8, 30, 30}; // third
 SDL_Rect lifeFont = {2*256/3, 10, 256/3, 224 / 8 - 10}; // "-LIFE-"
 SDL_Rect lifeStretch = {2*SCREEN_WIDTH / 3 + 20, 0, SCREEN_WIDTH / 3, SCREEN_HEIGHT / 8}; // stretches "-LIFE-" to correct size
 
+// music that will be played 
+Mix_Music *gMusic=NULL;
+
 
 bool init() {
     // Initialization flag
     bool success = true;
 
     // Initialize SDL
-    if( SDL_Init( SDL_INIT_VIDEO ) < 0 ){
+    if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO ) < 0 ){
         printf( "SDL could not initialize! SDL_Error: %s\n", SDL_GetError() );
         success = false;
     }else{
@@ -108,6 +112,12 @@ bool init() {
                 if( !( IMG_Init(imgFlags) & imgFlags ) ){
                     printf("SDL_image could not initialize! SDL_image_Error: %s\n", IMG_GetError() );
                     success = false;
+                }
+                
+                //Initialize SDL_mixer
+                if(Mix_openAudio(44100,MIX_DEFAULT_FORMAT,2,2048)<0){
+                    printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+                    success =false;
                 }
             }
         }
@@ -311,7 +321,12 @@ bool loadMedia() {
         e2.setSprites(enemies);
         b.setSprites(enemies);
     }
-
+    // Load music
+    gMusic= Mi_LoadMUS("Gamesound.wav");
+    if (gMusic == NULL){
+        printf("Failed to load music! SDL_mixer Error: %s\n", Mix_GetError() );
+        success =false;
+    }
     
 
     return success;
@@ -327,6 +342,9 @@ void close(){
     gTreasureTexture.free();
     gInvText.free();
     gDungeonTexture.free();
+    // Free Music
+    Mix_FreeMusic(gMusic);
+    gMusic=NULL;
 
     // Destroy Window
     SDL_DestroyRenderer(gRenderer);
@@ -335,6 +353,7 @@ void close(){
     gRenderer = NULL;
 
     // Quit SDL Subsystems
+    Mix_Quit();
     IMG_Quit();
     SDL_Quit();
 }
@@ -546,6 +565,7 @@ int main( int argc, char* args[] ){
 
             // While application is running
             while( !quit ){
+                Mix_PlayMusic(gMusic, -1);
                 // Handle events on queue
                 while(SDL_PollEvent( &e ) != 0){
                     // User requests quit
