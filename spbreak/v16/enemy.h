@@ -5,9 +5,9 @@
 
 class Enemy : public Character {
     public:
-        Enemy(int, int, int, int, int, string, int, SDL_Rect*, int, int, bool, int, int, int, int, int);        
+        Enemy(int, int, int, int, int, string, int, SDL_Rect*, int, int, bool, int, int, int, int, int);// constructor
         ~Enemy();
-        void move(const Uint8*);
+        void move(const Uint8*);// movement is autonomus input added to match inherited function 
         void attack();
 
     // don't need to add anything to private

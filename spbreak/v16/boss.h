@@ -5,9 +5,9 @@
 
 class Boss: public Character {
     public:
-        Boss(int, int, int, int, int, string, int, SDL_Rect*, int, int, bool, int, int, int, int, int);
+        Boss(int, int, int, int, int, string, int, SDL_Rect*, int, int, bool, int, int, int, int, int);// constructor 
         ~Boss();
-        void move(const Uint8*);
+        void move(const Uint8*);// movement is autonomus, input added to match inherited function
         void attack();
 
     // don't need to add anything to private

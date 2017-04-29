@@ -5,10 +5,10 @@
 
 class Link : public Character {
     public:
-        Link(int, int, int, int, int, string, int, SDL_Rect*, int, int, bool, int, int, int, int, int);
-        ~Link();
-        void move(const Uint8*);
-        void attack();
+        Link(int, int, int, int, int, string, int, SDL_Rect*, int, int, bool, int, int, int, int, int);//constructor
+        ~Link();// deconstructor 
+        void move(const Uint8*); // input needed to move character
+        void attack();// function called when user presses A
 
     // don't need to add anything to private
 };
