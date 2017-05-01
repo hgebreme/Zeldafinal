@@ -7,6 +7,7 @@ has been made significantly smaller due to the time restraint of the project, th
 many of the original game’s features. The user leads Link through the world, helping him defeat 
 enemies and collect treasure along the way.
 
+
 II.	Game Logic
 
 The user is to help Link navigate through the world, helping him defeat enemies and collect treasure 
@@ -14,9 +15,11 @@ along the way. If link successfully attacks the enemy, it will take damage. Othe
 damage and if harmed enough, will be defeated. Collecting treasure will aide Link and can repair 
 damage done by enemies.
 
+
 III.	User Manual
 
 A.	Special Libraries Needed
+
 In order to create the necessary graphics, this program uses the SDL 2 graphics library. This program 
 was built using the SDL 2 library installed on the University of Notre Dame student machines. If 
 attempting to run Zelda on a different machine where the SDL 2 library is not yet installed, please 
@@ -27,6 +30,7 @@ highly recommended that Zelda is run on the physical machine.
 SDL 2 Downloading Instructions: http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php
 
 B.	Compiling Instructions
+
 This program was built using the Linux operating system. All commands below, unless otherwise 
 specified, are to be entered in the terminal command line. Commands are subject to change when running 
 on other operating systems. 
@@ -43,6 +47,7 @@ provided
 Makefile.
 
 C.	Game Controls
+
 To run the program, please enter "Zelda" (without quotes) and the program will open in a new window. 
 To move Link up, left, down, and right, use the E, S, D, and F keys respectively. To make Link attack, use the A key.
 
