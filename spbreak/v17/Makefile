@@ -1,5 +1,5 @@
 CC= g++
-CFLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
+CFLAGS = -lSDL2 -lSDL2_image -lSDL2_mixer
 
 takedamage: main.o ltexture.o link.o character.o enemy.o boss.o
 	$(CC) $(CFLAGS) -o $@ $^

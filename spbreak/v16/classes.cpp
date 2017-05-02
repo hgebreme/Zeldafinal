@@ -116,7 +116,7 @@ bool init() {
                 }
                 
                 //Initialize SDL_mixer
-                if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,8192)<0){
+                if(Mix_OpenAudio(22050,MIX_DEFAULT_FORMAT,2,4096)<0){
                     printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
                     success =false;
                 }
@@ -571,8 +571,9 @@ int main( int argc, char* args[] ){
 
             // While application is running
             while( !quit ){
-                // SDL_Delay(100); 
-                 Mix_PlayMusic(gMusic, -1);
+                if(Mix_PlayingMusic() == 0){
+                    Mix_PlayMusic(gMusic, -1);
+                }
                 // Handle events on queue
                 while(SDL_PollEvent( &e ) != 0){
                     // User requests quit
@@ -843,7 +844,6 @@ int main( int argc, char* args[] ){
                         greenLocation.y += 3*SCREEN_HEIGHT / 32;
                         break;
                 }
- 
             }
         }
     }
