@@ -26,24 +26,47 @@ Boss::Boss(int h=0, int x=0, int y=0, int px=0, int py=0, string path="empty", i
     setDir(dir);
     setStretch(sx, sy, sw, sh);
     setMaxHealth(m);
+    setAttackXPos((rand() % 4*fullScreen.w/5) + fullScreen.w / 8);
+    b.setAttackYPos((rand() % 3*fullScreen.h/5) + fullScreen.y + 2*fullScreen.h/11); 
 }
 
 Boss::~Boss(){}
 
 void Boss::attack(){
-    int x = (rand() % 3*fullScreen.w/5) + fullScreen.w / 8;
-    int y = (rand() % 3*fullScreen.h/5) + fullScreen.y + 2*fullScreen.h / 11;
-    int w = 80;
-    int h = 80;
-    SDL_Rect damageBlock = {x, y, w, h};
-    SDL_SetRenderDrawColor(gRenderer, 235, 14, 14, 255);
+    int w = 100;
+    int h = 100;
+    SDL_Rect damageBlock = {getAttackXPos(), getAttackYPos(), w, h};
+    if(movecount % 50 > 37){
+        SDL_SetRenderDrawColor(gRenderer, 235, 14, 14, 255);
+    }else{
+        SDL_SetRenderDrawColor(gRenderer, 9, 39, 233, 255);
+    }
     SDL_RenderFillRect(gRenderer, &damageBlock);
     SDL_RenderPresent(gRenderer);
-    if(link.getXPos() > x && link.getXPos() < x + w && link.getYPos() > y && link.getYPos() < y + h){
-        link.takeDamage();
+    if(movecount % 50 > 37 && link.getXPos() + link.getStretchW() > getAttackXPos() && link.getXPos() < getAttackXPos() + w && link.getYPos() + link.getStretchH() > getAttackYPos() && link.getYPos() < getAttackYPos() + h){
+        if(link.getInvinceTime() == 0){
+            link.takeDamage();
+            link.setInvinceTime(25);
+        }
     }
 }
 
 void Boss::move(const Uint8* currentKeyStates){}
+
+int Boss::getAttackXPos(){
+    return attackXPos;
+}
+
+void Boss::setAttackXPos(int x){
+    attackXPos = x;
+}
+
+int Boss::getAttackYPos(){
+    return attackYPos;
+}
+
+void Boss::setAttackYPos(int y){
+    attackYPos = y;
+}
 
 // vim: set sts=4 sw=4 ts=8 expandtab ft=cpp:

@@ -9,8 +9,11 @@ class Link : public Character {
         ~Link();
         void move(const Uint8*);
         void attack();
+        int getInvinceTime();
+        void setInvinceTime(int);
 
-    // don't need to add anything to private
+    private:
+        int invinceTime; //number of frames that link is invincible
 };
 
 #endif

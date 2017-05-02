@@ -26,6 +26,7 @@ Link::Link(int h=0, int x=0, int y=0, int px=0, int py=0, string path=NULL, int 
     setDir(dir);
     setStretch(sx, sy, sw, sh);
     setMaxHealth(m);
+    setInvinceTime(0);
 }
 
 Link::~Link(){}
@@ -134,6 +135,13 @@ void Link::attack(){
         }
     }
 }
- 
+
+int Link::getInvinceTime(){
+    return invinceTime;
+}
+
+void Link::setInvinceTime(int t){
+     invinceTime = t;
+}
 
 // vim: set sts=4 sw=4 ts=8 expandtab ft=cpp:

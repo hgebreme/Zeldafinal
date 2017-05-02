@@ -141,6 +141,14 @@ void Character::setStretchY(int y){
     stretch.y = y;
 }
 
+int Character::getStretchW(){
+    return stretch.w;
+}
+
+int Character::getStretchH(){
+    return stretch.h;
+}
+
 void Character::renderChar(SDL_Renderer* r){
     SDL_Rect* rect = getSprites();
     SDL_Rect spriteRender = rect[frame];

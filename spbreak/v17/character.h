@@ -43,6 +43,8 @@ class Character{
         void setStretch(int, int, int, int);
         void setStretchX(int);
         void setStretchY(int);
+        int getStretchW();
+        int getStretchH();
         int getMaxHealth();
         void setMaxHealth(int);
 

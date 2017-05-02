@@ -33,13 +33,25 @@ Enemy::~Enemy(){}
 void Enemy::attack(){
         setFrame(getFrame() + 6);
         if(link.getXPos() < getXPos() + getStretch().w && link.getXPos() > getXPos() && link.getYPos() > getYPos() && link.getYPos() < getYPos() + getStretch().h){
-            link.takeDamage();
+            if(link.getInvinceTime() == 0){
+                link.takeDamage();
+                link.setInvinceTime(10);
+            }
         }else if(link.getXPos() < getXPos() + getStretch().w && link.getXPos() > getXPos() && link.getYPos() + link.getStretch().h > getYPos() && link.getYPos() + link.getStretch().h < getYPos() + getStretch().h){
-            link.takeDamage();
+            if(link.getInvinceTime() == 0){
+                link.takeDamage();
+                link.setInvinceTime(10);
+            }
         }else if(link.getXPos() + link.getStretch().w > getXPos() && link.getXPos() + link.getStretch().w < getXPos() + getStretch().w && link.getYPos() + link.getStretch().h > getYPos() && link.getYPos() + link.getStretch().h < getYPos() + getStretch().h){
-            link.takeDamage();
+            if(link.getInvinceTime() == 0){
+                link.takeDamage();
+                link.setInvinceTime(10);
+            }
         }else if(link.getXPos() + link.getStretch().w > getXPos() && link.getXPos() + link.getStretch().w < getXPos() + getStretch().w && link.getYPos() > getYPos() && link.getYPos() < getYPos() + getStretch().h){
-            link.takeDamage();
+            if(link.getInvinceTime() == 0){
+                link.takeDamage();
+                link.setInvinceTime(10);
+            }
         }
 }
 

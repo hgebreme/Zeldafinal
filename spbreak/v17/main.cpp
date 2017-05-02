@@ -777,7 +777,7 @@ int main( int argc, char* args[] ){
                 checkBounds(&b, fullScreen, num, false);
 
                 // have enemies attack (or not, it depends on movecount)
-                if(movecount % 50 == 0){
+                if(movecount % 50 > 45){
                     if(num < 4){
                         if(e0.getAlive()){
                             e0.attack();
@@ -788,7 +788,14 @@ int main( int argc, char* args[] ){
                         if(e2.getAlive()){
                             e2.attack();
                         }
-                    }else if(num == 4 && b.getAlive()){
+                    }
+                }
+                if(movecount % 50 > 25){
+                    if(num == 4 && b.getAlive()){
+                        if(movecount % 50 == 26){
+                            b.setAttackXPos((rand() % 4*fullScreen.w/5) + fullScreen.w / 8);
+                            b.setAttackYPos((rand() % 3*fullScreen.h/5) + fullScreen.y + 2*fullScreen.h/11);
+                        }
                         b.attack();
                     }
                 }
@@ -937,7 +944,11 @@ int main( int argc, char* args[] ){
                         greenLocation.y += 3*SCREEN_HEIGHT / 32;
                         break;
                 }
- 
+                
+                // Update Link InvinceTime
+                if(link.getInvinceTime() > 0){
+                    link.setInvinceTime(link.getInvinceTime() - 1);
+                }
             }
         }
     }

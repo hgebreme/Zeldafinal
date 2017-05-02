@@ -9,8 +9,15 @@ class Boss: public Character {
         ~Boss();
         void move(const Uint8*);
         void attack();
+        int getAttackXPos();
+        void setAttackXPos(int);
+        int getAttackYPos();
+        void setAttackYPos(int);
 
-    // don't need to add anything to private
+    private:
+        // Variables for the x and y position for its attack
+        int attackXPos;
+        int attackYPos;
 
 };
 
