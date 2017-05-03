@@ -25,6 +25,10 @@ const int SPEED = 5;
 int movecount = 0; // determines when different moves happen
 int endgamecount = 0; // determines how long the last room is shown before showing the endgame screen
 
+// Determine which square link is in
+int num = 0;
+int prevnum = 0;
+
 // Starts up SDL and creates window
 bool init();
 
@@ -97,6 +101,7 @@ Mix_Music *gMusic1 = NULL; // intro
 Mix_Music *gMusic2 = NULL; // game over win
 Mix_Music *gMusic3 = NULL; // overworld
 
+void reset(); // reset the game after a gameover
 
 bool init() {
     // Initialization flag
@@ -648,11 +653,11 @@ int main( int argc, char* args[] ){
 
             // Event handler
             SDL_Event e;
-        
+/*        
             // Determine which square link is in
             int num = 0;
             int prevnum = 0;
-
+*/
 	    // position of red heart
 	    int heartx = SCREEN_WIDTH / 2 + 40;
             int hearty = SCREEN_HEIGHT / 2 - 10;
@@ -937,6 +942,9 @@ int main( int argc, char* args[] ){
                     // render game over (win) image
                     if(num == 5 && endgamecount > 30){
                         SDL_RenderCopy(gRenderer, gWin.texture(), &gWinSection, &fullScreen);
+                        if(e.type == SDL_KEYDOWN && endgamecount > 60){
+                            reset();
+                        }
                     }
             
                     // increment in game count
@@ -944,8 +952,12 @@ int main( int argc, char* args[] ){
                         endgamecount++;
                     }
 
-                }else{
+                }else{ // if link is dead
+                    endgamecount++; // increment endgamecount
                     SDL_RenderCopy(gRenderer, gGameOver.texture(), NULL, &entireScreen);
+                    if(e.type == SDL_KEYDOWN && endgamecount > 30){
+                        reset();
+                    }
                 }
 
                 // Update screen
@@ -990,6 +1002,41 @@ int main( int argc, char* args[] ){
 
     return 0;
 }
+
+void reset(){
+    // reset link
+    link.setXPos(SCREEN_WIDTH / 4);
+    link.setYPos(SCREEN_HEIGHT / 2);
+    link.setHealth(link.getMaxHealth());
+    link.setAlive(true);
+
+    // reset enemies
+    e0.setAlive(true);
+    e1.setAlive(true);
+    e2.setAlive(true);
+    b.setAlive(false);
+    e0.setHealth(e0.getMaxHealth());
+    e1.setHealth(e1.getMaxHealth());
+    e2.setHealth(e2.getMaxHealth());
+    e0.setXPos(SCREEN_WIDTH / 2 - 20);
+    e0.setYPos(SCREEN_HEIGHT / 2 - 20);
+    e1.setXPos(3*SCREEN_HEIGHT / 4 - 10);
+    e1.setYPos(3*SCREEN_HEIGHT/ 4 - 10);
+    e2.setXPos(SCREEN_WIDTH / 4);
+    e2.setYPos(3*SCREEN_HEIGHT / 4);
+
+    // reset screen that is rendered
+    num = 0;
+
+    // halt the current music
+    if(Mix_PlayingMusic() == 1){
+        Mix_HaltMusic();
+    }
+
+    // reset endgamecount
+    endgamecount = 0;
+}
+
 
 /* vim: set sts=4 sw=5 ts=8 expandtab ft=c: */
  

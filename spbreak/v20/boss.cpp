@@ -51,12 +51,14 @@ void Boss::attack(){
     if(movecount % 50 > 37 && link.getXPos() + link.getStretchW() > getAttack1XPos() && link.getXPos() < getAttack1XPos() + w && link.getYPos() + link.getStretchH() > getAttack1YPos() && link.getYPos() < getAttack1YPos() + h){
         if(link.getInvinceTime() == 0){
             link.takeDamage();
+            link.takeDamage(); // doubles the damage. makes it harder (this line can be removed to make the game easier)
             link.setInvinceTime(25);
         }
     }
     if(movecount % 50 > 37 && link.getXPos() + link.getStretchW() > getAttack2XPos() && link.getXPos() < getAttack2XPos() + w && link.getYPos() + link.getStretchH() > getAttack2YPos() && link.getYPos() < getAttack2YPos() + h){
         if(link.getInvinceTime() == 0){
             link.takeDamage();
+            link.takeDamage(); // doubles the damage. makes it harder (this line can be removed to make the game easier)
             link.setInvinceTime(25);
         }
     }
