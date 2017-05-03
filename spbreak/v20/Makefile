@@ -1,7 +1,7 @@
 CC= g++
 CFLAGS = -lSDL2 -lSDL2_image -lSDL2_mixer
 
-TheLegendOfZelda: main.o ltexture.o link.o character.o enemy.o boss.o
+Zelda: main.o ltexture.o link.o character.o enemy.o boss.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 ltexture.o: ltexture.cpp ltexture.h
