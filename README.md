@@ -1,4 +1,4 @@
-I.	Introduction
+**I.	Introduction**
 
 This program is a simple C++ implementation of Nintendo’s classic The Legend of Zelda.  For those less 
 common with Zelda, the game revolves around its protagonist, Link, as he navigates the world and 
@@ -8,7 +8,7 @@ many of the original game’s features. The user leads Link through the world, h
 enemies and collect treasure along the way.
 
 
-II.	Game Logic
+**II.	Game Logic**
 
 The user is to help Link navigate through the world, helping him defeat enemies and collect treasure 
 along the way. If link successfully attacks the enemy, it will take damage. Otherwise, Link will take 
@@ -43,16 +43,16 @@ https://gitlab.com/anemecek/DataStructuresFinalProject
 To compile the program, the user’s paths must be set appropriately to the location of the SDL 2 
 graphics library. If on one of the University of Notre Dame student machines, set the paths as 
 follows:
-'''
+```
 setenv PATH /afs/nd.edu/user14/csesoft/new/bin:$PATH
 setenv LD_LIBRARY_PATH /afs/nd.edu/user14/csesoft/new/lib:$LD_LIBRARY_PATH
-'''
-Once this is done, the user can simply enter 'make' (without quotes) to compile the program 
+```
+Once this is done, the user can simply enter `make` (without quotes) to compile the program 
 using the provided Makefile.
 
 C.	Game Controls
 
-To run the program, please enter './Zelda' (without quotes) and the program will open in a new 
+To run the program, please enter `./Zelda` (without quotes) and the program will open in a new 
 window. A title screen will initially pop up. To start the game from the title screen, press any 
 key. To move Link, use the keyboard’s arrow keys. To make Link attack, use the A key. Once a 
 Game Over screen is reached (either after beating the game or dying), reset the game by pressing 
