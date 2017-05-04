@@ -133,7 +133,7 @@ void Link::attack(){
                 dropHeart = true;
             }
         }
-        if(stretch.y - 10 < bstretch.y + bstretch.h && stretch.y - 10 > bstretch.y && stretch.x < bstretch.w + bstretch.w && stretch.x + stretch.w > bstretch.x && b.getAlive()){
+        if(stretch.y - 10 < bstretch.y + bstretch.h && stretch.y - 10 > bstretch.y && stretch.x < bstretch.x + bstretch.w && stretch.x + stretch.w > bstretch.x && b.getAlive()){
             b.takeDamage();
         }
     

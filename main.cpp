@@ -497,6 +497,9 @@ bool checkBounds(Character* thechar, SDL_Rect fullScreen, int &num, bool link){
                         }else if(thechar->getXPos() > fullScreen.w - thechar->getStretch().w && link){
                             num = 1;
                             thechar->setXPos(0);
+                        }else if(thechar->getXPos() + thechar->getStretch().w > fullScreen.w && !link){
+                            thechar->setYPos(thechar->getPrevYPos());
+                            thechar->setXPos(thechar->getPrevXPos());
                         }
                         break;
                     case 1:
@@ -532,10 +535,16 @@ bool checkBounds(Character* thechar, SDL_Rect fullScreen, int &num, bool link){
                             num = 0;
                             thechar->setXPos(SCREEN_WIDTH - thechar->getStretch().w);
                             thechar->setYPos(5*fullScreen.h/11 + fullScreen.y);
+                        }else if(thechar->getXPos() < 0 && !link){
+                            thechar->setYPos(thechar->getPrevYPos());
+                            thechar->setXPos(thechar->getPrevXPos());
                         }else if(thechar->getYPos() > SCREEN_HEIGHT - thechar->getStretch().h && link){
                             num = 3;
                             thechar->setXPos(7*fullScreen.w/16);
                             thechar->setYPos(fullScreen.y);
+                        }else if(thechar->getYPos() > SCREEN_HEIGHT - thechar->getStretch().h && !link){
+                            thechar->setYPos(thechar->getPrevYPos());
+                            thechar->setXPos(thechar->getPrevXPos());
                         }
                         break;
                     case 3:
@@ -559,9 +568,15 @@ bool checkBounds(Character* thechar, SDL_Rect fullScreen, int &num, bool link){
                             num = 1;
                             thechar->setYPos(SCREEN_HEIGHT - thechar->getStretch().w);
                             thechar->setXPos(10*fullScreen.w/16);
+                        }else if(thechar->getYPos() < fullScreen.y && !link){
+                            thechar->setYPos(thechar->getPrevYPos());
+                            thechar->setXPos(thechar->getPrevXPos());
                         }else if(thechar->getXPos() < 0 && link){
                             num = 2;
                             thechar->setXPos(SCREEN_WIDTH - thechar->getStretch().w);
+                        }else if(thechar->getXPos() < 0 && !link){
+                            thechar->setYPos(thechar->getPrevYPos());
+                            thechar->setXPos(thechar->getPrevXPos());
                         }
                         break;
                     case 2:
@@ -596,10 +611,16 @@ bool checkBounds(Character* thechar, SDL_Rect fullScreen, int &num, bool link){
                         }else if(thechar->getXPos() > fullScreen.w - thechar->getStretch().w && link){
                             num = 3;
                             thechar->setXPos(0);
+                        }else if(thechar->getXPos() > fullScreen.w - thechar->getStretch().w && !link){
+                            thechar->setYPos(thechar->getPrevYPos());
+                            thechar->setXPos(thechar->getPrevXPos());
                         }else if(thechar->getXPos() > 11*fullScreen.w/16 - 15 && thechar->getXPos() < 12*fullScreen.w/16 - thechar->getStretch().w + 15 && thechar->getYPos() < 3*fullScreen.h/22 + fullScreen.y && link){
                             num = 4;
                             thechar->setXPos((fullScreen.w - thechar->getStretch().w) / 2);
                             thechar->setYPos(9*fullScreen.h/11 + fullScreen.y - thechar->getStretch().h);
+                        }else if(thechar->getYPos() < fullScreen.y){
+                            thechar->setYPos(thechar->getPrevYPos());
+                            thechar->setXPos(thechar->getPrevXPos());
                         }
                         break;
                     case 4:
