@@ -15,18 +15,17 @@ along the way. If link successfully attacks the enemy, it will take damage. Othe
 damage and if harmed enough, will be defeated. Collecting treasure will aide Link and can repair 
 damage done by enemies.
 
+**
+3.	User Manual
 
-**3.	User Manual**
-
-    **1.	Special Libraries Needed**
+    1.	Special Libraries Needed**
 
     In order to create the necessary graphics, this program uses the SDL 2 graphics library. 
-    This program 
-was built using the SDL 2 library installed on the University of Notre Dame student machines. If 
-attempting to run Zelda on a different machine where the SDL 2 library is not yet installed, please 
-follow the download instructions below for the appropriate operating system. It is important to note 
-that the responsiveness of SDL 2 is extremely slow over X11 forwarding and unlikely to load, so it is 
-highly recommended that Zelda is run on the physical machine.
+    This program was built using the SDL 2 library installed on the University of Notre Dame student 
+    machines. If attempting to run Zelda on a different machine where the SDL 2 library is not yet 
+    installed, please follow the download instructions below for the appropriate operating system. It 
+    is important to note that the responsiveness of SDL 2 is extremely slow over X11 forwarding and 
+    unlikely to load, so it is highly recommended that Zelda is run on the physical machine.
 
     SDL 2 Downloading Instructions: http://lazyfoo.net/tutorials/SDL/01_hello_SDL/index.php
 
