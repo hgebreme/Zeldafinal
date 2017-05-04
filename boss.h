@@ -5,10 +5,12 @@
 
 class Boss: public Character {
     public:
-        Boss(int, int, int, int, int, string, int, SDL_Rect*, int, int, bool, int, int, int, int, int, int);
-        ~Boss();
-        void move(const Uint8*);
-        void attack();
+        Boss(int, int, int, int, int, string, int, SDL_Rect*, int, int, bool, int, int, int, int, int, int); // constructor
+        ~Boss(); // deconstructor
+        void move(const Uint8*); // move the sprite
+        void attack(); // attack
+
+        // get and set private variables
         int getAttack1XPos();
         void setAttack1XPos(int);
         int getAttack1YPos();

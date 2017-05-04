@@ -70,7 +70,7 @@ class Character{
         bool alive; // keeps track of whether the character is alive
         int dir; // determines which direction to move the character
         SDL_Rect stretch; // stetches the sprite to the appropriate size
-        int maxHealth;
+        int maxHealth; // maximum health of the character
 };
 
 #endif

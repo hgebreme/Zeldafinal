@@ -88,7 +88,7 @@ SDL_Rect blackRect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT / 4}; // black rectange 
 SDL_Rect greyRect = {SCREEN_WIDTH / 16, SCREEN_HEIGHT / 32, SCREEN_WIDTH / 4, 3* SCREEN_HEIGHT / 16}; // grey rectangle representing entire map
 SDL_Rect greenLocation = {SCREEN_WIDTH / 8, 5 * SCREEN_HEIGHT / 64, SCREEN_WIDTH / 128, SCREEN_HEIGHT / 128}; // green rectangle showing location on map
 SDL_Rect inventory = {256 / 3, 10, 256 / 3, 224 / 4 - 10}; // shows number of rupees, etc.
-LTexture gInvText;
+LTexture gInvText; // texture for image that shows number of rupees, etc.
 SDL_Rect invStretch = {SCREEN_WIDTH/3, 0, SCREEN_WIDTH / 3, SCREEN_HEIGHT / 4}; // stretches inventory to correct size
 SDL_Rect heart1 = {3*SCREEN_WIDTH / 4, SCREEN_HEIGHT / 8, 30, 30}; // first heart in life meter
 SDL_Rect heart2 = {3*SCREEN_WIDTH / 4 + 45, SCREEN_HEIGHT / 8, 30, 30}; // second heart in life meter
@@ -161,18 +161,20 @@ bool loadMedia() {
         success = false;
     }
     Mix_VolumeMusic(MIX_MAX_VOLUME);
-    gMusic1 = Mix_LoadMUS("intro.wav");
+
+    gMusic1 = Mix_LoadMUS("intro.wav"); // load title screen song
     if(gMusic1 == NULL){
         printf("Failed to load title music! SDL_mixer Error: %s\n", Mix_GetError());
         success = false;
     }
-    gMusic2 = Mix_LoadMUS("fairyfountain.wav");
+    
+    gMusic2 = Mix_LoadMUS("fairyfountain.wav"); // load end game (win) song
     if(gMusic2 == NULL){
         printf("Failed to load end music! SDL_mixer Error: %s\n", Mix_GetError());
         success = false;
     }
 
-    gMusic3 = Mix_LoadMUS("overworld.wav");
+    gMusic3 = Mix_LoadMUS("overworld.wav"); // load main song
     if(gMusic3 == NULL){
         printf("Failed to load overworld music1 SDL_Eror: %s\n", Mix_GetError());
         success = false;
@@ -279,7 +281,7 @@ bool loadMedia() {
         linkSprites[11].y = 90;
 
 
-        link.setSprites(linkSprites);
+        link.setSprites(linkSprites); // set link's sprites
     }
 
     // Load treasure (red heart)
@@ -417,13 +419,12 @@ bool loadMedia() {
         enemies[9].w = 20;
         enemies[9].h = 20;
 
+        // set the enemy and boss sprites
         e0.setSprites(enemies);
         e1.setSprites(enemies);
         e2.setSprites(enemies);
         b.setSprites(enemies);
     }
-
-    
 
     return success;
 }
@@ -463,7 +464,7 @@ void close(){
 bool checkBounds(Character* thechar, SDL_Rect fullScreen, int &num, bool link){
                 // Check if in bounds
                 switch(num){
-                    case 0:
+                    case 0: // top left overworld room (start room)
                         if(thechar->getYPos() < fullScreen.h / 6 + fullScreen.y - 10){
                             thechar->setYPos(thechar->getPrevYPos());
                         }else if(thechar->getXPos() < fullScreen.w / 16){
@@ -502,7 +503,7 @@ bool checkBounds(Character* thechar, SDL_Rect fullScreen, int &num, bool link){
                             thechar->setXPos(thechar->getPrevXPos());
                         }
                         break;
-                    case 1:
+                    case 1: // top right overworld room
                         if(thechar->getYPos() < 2*fullScreen.h/11 + fullScreen.y - 10){
                             thechar->setYPos(thechar->getPrevYPos());
                         }else if(thechar->getXPos() > 11*fullScreen.w/16 - thechar->getStretch().w + 10){
@@ -547,7 +548,7 @@ bool checkBounds(Character* thechar, SDL_Rect fullScreen, int &num, bool link){
                             thechar->setXPos(thechar->getPrevXPos());
                         }
                         break;
-                    case 3:
+                    case 3: // bottom right overworld room
                         if(thechar->getYPos() > 9*fullScreen.h/11 + fullScreen.y - thechar->getStretch().h + 10){
                             thechar->setYPos(thechar->getPrevYPos());
                         }else if(thechar->getXPos() > 15*fullScreen.w/16 - thechar->getStretch().w + 10){
@@ -579,7 +580,7 @@ bool checkBounds(Character* thechar, SDL_Rect fullScreen, int &num, bool link){
                             thechar->setXPos(thechar->getPrevXPos());
                         }
                         break;
-                    case 2:
+                    case 2: // bottom left overworld room
                         if(thechar->getXPos() < fullScreen.w/16){
                             thechar->setXPos(thechar->getPrevXPos());
                         }else if(thechar->getYPos() > 9*fullScreen.h/11 + fullScreen.y - thechar->getStretch().h + 10){
@@ -623,7 +624,7 @@ bool checkBounds(Character* thechar, SDL_Rect fullScreen, int &num, bool link){
                             thechar->setXPos(thechar->getPrevXPos());
                         }
                         break;
-                    case 4:
+                    case 4: //  boss room
                         if(thechar->getXPos() < 2*fullScreen.w/16){
                             thechar->setXPos(thechar->getPrevXPos());
                         }else if(thechar->getXPos() > 14*fullScreen.w/16 - thechar->getStretch().w + 10){
@@ -674,11 +675,7 @@ int main( int argc, char* args[] ){
 
             // Event handler
             SDL_Event e;
-/*        
-            // Determine which square link is in
-            int num = 0;
-            int prevnum = 0;
-*/
+
 	    // position of red heart
 	    int heartx = SCREEN_WIDTH / 2 + 40;
             int hearty = SCREEN_HEIGHT / 2 - 10;
@@ -695,7 +692,7 @@ int main( int argc, char* args[] ){
                     if(Mix_PlayingMusic() == 0){
                         Mix_PlayMusic(gMusic1, -1);
                     }
-                    while(e.type != SDL_KEYDOWN){
+                    while(e.type != SDL_KEYDOWN){ // wait for keypress
                         SDL_RenderCopy(gRenderer, gStart.texture(), NULL, &entireScreen);
                         SDL_RenderPresent(gRenderer);
                         SDL_PollEvent(&e);
@@ -704,8 +701,8 @@ int main( int argc, char* args[] ){
                             break;
                         }
                     }
-                    start = false;
-                    Mix_HaltMusic();
+                    start = false; // leave start screen
+                    Mix_HaltMusic(); // stop music
                 }
 
                 // Play music
@@ -904,12 +901,12 @@ int main( int argc, char* args[] ){
                      SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF); // background
                      SDL_RenderFillRect(gRenderer, &blackRect); // background
 
-                     if(num < 4){
+                     if(num < 4){ // if in overworld, render minimap
                          SDL_SetRenderDrawColor(gRenderer, 156, 156, 156, 0xFF);
                          SDL_RenderFillRect(gRenderer, &greyRect);
                          SDL_SetRenderDrawColor(gRenderer, 46, 206, 46, 0xFF);
                          SDL_RenderFillRect(gRenderer, &greenLocation);
-                     }else{
+                     }else{ // if in boss room or final room, render boss health bar
                          SDL_SetRenderDrawColor(gRenderer, 156, 156, 156, 0xFF);
                          SDL_Rect maxHealth = {SCREEN_WIDTH / 24, SCREEN_HEIGHT / 12, SCREEN_WIDTH / 4, SCREEN_HEIGHT / 24};
                          SDL_RenderFillRect(gRenderer, &maxHealth);
@@ -925,26 +922,26 @@ int main( int argc, char* args[] ){
 
                      // Render Life
                      switch(link.getHealth()){
-                         case 1:
+                         case 1: // half heart
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[1], &heart1);
                              break;
-                         case 2:
+                         case 2: // full heart
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[0], &heart1);
                              break;
-                         case 3:
+                         case 3: // half and full heart
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[0], &heart1);
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[1], &heart2);
                              break;
-                         case 4:
+                         case 4: // two full hearts
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[0], &heart1);
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[0], &heart2);
                              break;
-                         case 5:
+                         case 5: // half heart and two full hearts
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[0], &heart1);
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[0], &heart2);
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[1], &heart3);
                              break;
-                         default:
+                         default: // three full hearts
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[0], &heart1);
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[0], &heart2);
                              SDL_RenderCopy(gRenderer, gTreasureTexture.texture(), &treasure[0], &heart3);
@@ -1054,7 +1051,8 @@ void reset(){
         Mix_HaltMusic();
     }
 
-    // reset endgamecount
+    // reset counters
+    movecount = 0;
     endgamecount = 0;
 }
 
