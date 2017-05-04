@@ -1,3 +1,9 @@
+**Zelda**   
+Created by Andrew Nemecek (@anemecek), Meg Ryan (@mryan29), and Harry Gebremedhin (@harryfs)
+University of Notre Dame
+CSE20312 Final Project
+May 4th, 2017
+
 **1.	Introduction**
 
 This program is a simple C++ implementation of Nintendo’s classic The Legend of Zelda. For those less 
@@ -15,10 +21,10 @@ along the way. If link successfully attacks the enemy, it will take damage. Othe
 damage and if harmed enough, will be defeated. Collecting treasure will aide Link and can repair 
 damage done by enemies.
 
-**
-3.	User Manual
 
-    1.	Special Libraries Needed**
+**3.	User Manual**
+
+    **1.	Special Libraries Needed**
 
     In order to create the necessary graphics, this program uses the SDL 2 graphics library. 
     This program was built using the SDL 2 library installed on the University of Notre Dame student 
@@ -32,34 +38,31 @@ damage done by enemies.
     **2.	Compiling Instructions**
 
     This program was built using the Linux operating system. All commands below, unless 
-    otherwise 
-specified, are to be entered in the terminal command line. Commands are subject to change when running 
-on other operating systems. 
+    otherwise specified, are to be entered in the terminal command line. Commands are subject to 
+    change when running on other operating systems. 
 
     To gain access to the necessary files, the user must clone the Git repository from the link 
-below. Once the user has the files, he/she can compile the program.
+	below. Once the user has the files, he/she can compile the program.
 
     https://gitlab.com/anemecek/DataStructuresFinalProject
 
     To compile the program, the user’s paths must be set appropriately to the location of the 
-    SDL 2 
-graphics library. If on one of the University of Notre Dame student machines, set the paths as 
-follows:
+    SDL 2 graphics library. If on one of the University of Notre Dame student machines, set the paths 
+    as follows:
     ```
     setenv PATH /afs/nd.edu/user14/csesoft/new/bin:$PATH
     setenv LD_LIBRARY_PATH /afs/nd.edu/user14/csesoft/new/lib:$LD_LIBRARY_PATH
     ```
     Once this is done, the user can simply enter `make` (without quotes) to compile the program 
-using the provided Makefile.
+	using the provided Makefile.
 
     **3.	Game Controls**
 
     To run the program, please enter `./Zelda` (without quotes) and the program will open in a 
-   new 
-window. A title screen will initially pop up. To start the game from the title screen, press any 
-key. To move Link, use the keyboard’s arrow keys. To make Link attack, use the A key. Once a 
-Game Over screen is reached (either after beating the game or dying), reset the game by pressing 
-any key after a few seconds.
+   	new window. A title screen will initially pop up. To start the game from the title screen, press 
+   	any key. To move Link, use the keyboard’s arrow keys. To make Link attack, use the A key. Once a 
+	Game Over screen is reached (either after beating the game or dying), reset the game by 
+	pressing any key after a few seconds.
 
     **4.	Known Bugs**
 
@@ -70,7 +73,7 @@ any key after a few seconds.
     Graphics:		https://www.spriters-resource.com/nes/legendofzelda/   
     SDL Tutorials:	http://lazyfoo.net/tutorials/SDL/index.php    
     Game Music:		https://www.youtube.com/watch?v=uyMKWJ5e1kg     
-					https://www.youtube.com/watch?v=lpEzYEoV9qY     
-					https://www.youtube.com/watch?v=IljKQ1BdHKI     
+				    https://www.youtube.com/watch?v=lpEzYEoV9qY     
+			    	https://www.youtube.com/watch?v=IljKQ1BdHKI     
 						
 
