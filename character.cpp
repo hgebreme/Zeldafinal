@@ -9,6 +9,7 @@
 using namespace std;
 
 Character::Character(){
+    // set all variables
     setHealth(0);
     setXPos(0);
     setYPos(0);
@@ -23,7 +24,7 @@ Character::Character(){
     setDir(0);
 }
 
-Character::~Character(){}
+Character::~Character(){} // no memory is dynamically allocated, so nothing must be done in the deconstructor
 
 int Character::getHealth(){
     return health;

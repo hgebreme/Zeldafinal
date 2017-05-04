@@ -12,6 +12,7 @@
 #include"constchars.h"
 
 Enemy::Enemy(int h=0, int x=0, int y=0, int px=0, int py=0, string path="empty", int n=0, SDL_Rect* sp=NULL, int f=0, int pf=0, bool a=true, int dir=0, int sx=0, int sy=0, int sw=0, int sh=0, int m=0){
+    // set all variables
     setHealth(h);
     setXPos(x);
     setYPos(y);
@@ -28,10 +29,12 @@ Enemy::Enemy(int h=0, int x=0, int y=0, int px=0, int py=0, string path="empty",
     setMaxHealth(m);
 }
 
-Enemy::~Enemy(){}
+Enemy::~Enemy(){} // no memory is dynamically allocated, so nothing must be done in the deconstructor
 
 void Enemy::attack(){
-        setFrame(getFrame() + 6);
+        setFrame(getFrame() + 6); // switch the frame being rendered to the one of it attacking
+
+        // check for collisions
         if(link.getXPos() < getXPos() + getStretch().w && link.getXPos() > getXPos() && link.getYPos() > getYPos() && link.getYPos() < getYPos() + getStretch().h){
             if(link.getInvinceTime() == 0){
                 link.takeDamage();
@@ -60,13 +63,15 @@ void Enemy::attack(){
 }
 
 void Enemy::move(const Uint8* currentKeyStates){
-    if(movecount % 5 == 0){
+    if(movecount % 5 == 0){ // change the direction that the enemy moves every 5 cycles through the main loop
         setDir(rand() % 4);
     }
 
+    // set previous x and y positions
     setPrevXPos(getXPos());
     setPrevYPos(getYPos());
 
+    // set new x and y positions
     switch(getDir()){
         case 0:
             setXPos(getXPos() + SPEED);

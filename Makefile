@@ -1,8 +1,6 @@
 CC= g++
 CFLAGS = -lSDL2 -lSDL2_image -lSDL2_mixer
 
-all: Zelda
-
 Zelda: main.o ltexture.o link.o character.o enemy.o boss.o
 	$(CC) $(CFLAGS) -o $@ $^
 
@@ -25,4 +23,4 @@ main.o: main.cpp ltexture.o character.o link.o enemy.o boss.o
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(TARGETS) *.o Zelda
+	rm -f $(TARGETS) *.o
