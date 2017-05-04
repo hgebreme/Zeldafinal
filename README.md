@@ -35,19 +35,39 @@ This program was built using the Linux operating system. All commands below, unl
 specified, are to be entered in the terminal command line. Commands are subject to change when running 
 on other operating systems. 
 
+To gain access to the necessary files, the user must clone the Git repository from the link 
+below. Once the user has the files, he/she can compile the program.
+
+https://gitlab.com/anemecek/DataStructuresFinalProject
+
 To compile the program, the user’s paths must be set appropriately to the location of the SDL 2 
 graphics library. If on one of the University of Notre Dame student machines, set the paths as 
 follows:
-
+'''
 setenv PATH /afs/nd.edu/user14/csesoft/new/bin:$PATH
 setenv LD_LIBRARY_PATH /afs/nd.edu/user14/csesoft/new/lib:$LD_LIBRARY_PATH
-
-Once this is done, the user can simply enter "make" (without quotes) to compile the program using the 
-provided 
-Makefile.
+'''
+Once this is done, the user can simply enter 'make' (without quotes) to compile the program 
+using the provided Makefile.
 
 C.	Game Controls
 
-To run the program, please enter "Zelda" (without quotes) and the program will open in a new window. 
-To move Link up, left, down, and right, use the E, S, D, and F keys respectively. To make Link attack, use the A key.
+To run the program, please enter './Zelda' (without quotes) and the program will open in a new 
+window. A title screen will initially pop up. To start the game from the title screen, press any 
+key. To move Link, use the keyboard’s arrow keys. To make Link attack, use the A key. Once a 
+Game Over screen is reached (either after beating the game or dying), reset the game by pressing 
+any key after a few seconds.
+
+D.	Known Bugs
+
+Currently, there are no major bugs of which we are aware. 
+
+E.	Credit
+
+Graphics:		https://www.spriters-resource.com/nes/legendofzelda/
+SDL Tutorials:	http://lazyfoo.net/tutorials/SDL/index.php
+Game Music:		https://www.youtube.com/watch?v=uyMKWJ5e1kg
+				https://www.youtube.com/watch?v=lpEzYEoV9qY
+				https://www.youtube.com/watch?v=IljKQ1BdHKI
+						
 
